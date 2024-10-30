@@ -1,0 +1,646 @@
+<style type="text/css">
+  .UNSTABLE {
+    background: #ff8702 !important;
+  }
+  .UNSTABLE-COLOR {
+    color: #ff8702 !important;
+  }
+  .ABORTED {
+    background: #dc3545 !important;
+  }
+  .ABORTED-COLOR {
+    color: #dc3545 !important;
+  }
+  .FAILURE {
+    background: #dc3545 !important;
+  }
+  .FAILURE-COLOR {
+    color: #dc3545 !important;
+  }
+  .SUCCESS {
+    background: #18c197 !important;
+  }
+  .SUCCESS-COLOR {
+    color: #18c197 !important;
+  }
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  .DEPLOY- {
+    display: none !important;
+  }
+  .DEPLOY-SUCCESS {
+    display: inline-block !important;
+  }
+  .table > thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+    font-family: \'Open Sans\', Verdana, Arial;
+    font-weight: normal;
+  }
+  .table > tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+  }
+  .table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+  }
+  .table > tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+  }
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  .table > tbody > tr > td,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > thead > tr > th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: center;
+    border-top: 1px solid #ddd;
+    text-align: center;
+  }
+  .table-bordered {
+    border: 1px solid #ddd;
+  }
+  .table-bordered > thead > tr > th {
+    border-bottom-width: 2px;
+  }
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tfoot > tr > td,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > thead > tr > th {
+    border: 1px solid #ddd;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  .btn:focus,
+  .btn:active:focus,
+  .btn.active:focus,
+  .btn.focus,
+  .btn:active.focus,
+  .btn.active.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+  .btn:hover,
+  .btn:focus,
+  .btn.focus {
+    color: #333;
+    text-decoration: none;
+  }
+  .btn:active,
+  .btn.active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  }
+  .btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+  }
+  .btn-success:focus,
+  .btn-success.focus {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #255625;
+  }
+  .btn-success:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+  }
+  .btn-success:active,
+  .btn-success.active,
+  .open > .dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+  }
+  .btn-success:active:hover,
+  .btn-success.active:hover,
+  .open > .dropdown-toggle.btn-success:hover,
+  .btn-success:active:focus,
+  .btn-success.active:focus,
+  .open > .dropdown-toggle.btn-success:focus,
+  .btn-success:active.focus,
+  .btn-success.active.focus,
+  .open > .dropdown-toggle.btn-success.focus {
+    color: #fff;
+    background-color: #398439;
+    border-color: #255625;
+  }
+  .btn-success:active,
+  .btn-success.active,
+  .open > .dropdown-toggle.btn-success {
+    background-image: none;
+  }
+  .btn-success.disabled:hover,
+  .btn-success[disabled]:hover,
+  fieldset[disabled] .btn-success:hover,
+  .btn-success.disabled:focus,
+  .btn-success[disabled]:focus,
+  fieldset[disabled] .btn-success:focus,
+  .btn-success.disabled.focus,
+  .btn-success[disabled].focus,
+  fieldset[disabled] .btn-success.focus {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+  }
+  .btn-success .badge {
+    color: #5cb85c;
+    background-color: #fff;
+  }
+
+  .btn-danger {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+  }
+  .btn-danger:focus,
+  .btn-danger.focus {
+    color: #fff;
+    background-color: #d33833;
+    border-color: #d33833;
+  }
+  .btn-danger:hover {
+    color: #fff;
+    background-color: #d33833;
+    border-color: #d33833;
+  }
+  .btn-danger:active,
+  .btn-danger.active,
+  .open > .dropdown-toggle.btn-danger {
+    color: #fff;
+    background-color: #d33833;
+    border-color: #d33833;
+  }
+  .btn-danger:active:hover,
+  .btn-danger.active:hover,
+  .open > .dropdown-toggle.btn-danger:hover,
+  .btn-danger:active:focus,
+  .btn-danger.active:focus,
+  .open > .dropdown-toggle.btn-danger:focus,
+  .btn-danger:active.focus,
+  .btn-danger.active.focus,
+  .open > .dropdown-toggle.btn-danger.focus {
+    color: #fff;
+    background-color: #d33833;
+    border-color: #d33833;
+  }
+  .btn-danger:active,
+  .btn-danger.active,
+  .open > .dropdown-toggle.btn-danger {
+    background-image: none;
+  }
+  .btn-danger.disabled:hover,
+  .btn-danger[disabled]:hover,
+  fieldset[disabled] .btn-danger:hover,
+  .btn-danger.disabled:focus,
+  .btn-danger[disabled]:focus,
+  fieldset[disabled] .btn-danger:focus,
+  .btn-danger.disabled.focus,
+  .btn-danger[disabled].focus,
+  fieldset[disabled] .btn-danger.focus {
+    background-color: #d33833;
+    border-color: #d33833;
+  }
+  .btn-danger .badge {
+    color: #d33833;
+    background-color: #fff;
+  }
+</style>
+
+<table
+  width="100%"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  bgcolor="#f0f0f0"
+  class=""
+>
+  <tbody>
+    <tr>
+      <td valign="middle" align="center">
+        <table
+          width="100%"
+          cellspacing="0"
+          cellpadding="0"
+          border="0"
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td valign="top" align="center">
+                <table
+                  class="main"
+                  width="600"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  align="center"
+                >
+                  <tbody>
+                    <tr>
+                      <td
+                        style="
+                          -moz-border-radius: 8px 8px 0px 0px;
+                          border-radius: 8px 8px 0px 0px;
+                        "
+                        data-bgcolor="theme-bg"
+                        valign="middle"
+                        class="$BUILD_STATUS"
+                        align="center"
+                      >
+                        <table
+                          width="100%"
+                          cellspacing="0"
+                          cellpadding="0"
+                          border="0"
+                          align="center"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="line-height: 25px; font-size: 25px"
+                                valign="middle"
+                                align="center"
+                                height="25"
+                              >
+                                &nbsp;
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="
+                                  font-family: \'Open Sans\', Verdana, Arial;
+                                  font-size: 30px;
+                                  color: #fff;
+                                  font-weight: normal;
+                                "
+                                valign="middle"
+                                align="center"
+                              >
+                                <multiline>BUILD: #$BUILD_NUMBER</multiline>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="line-height: 25px; font-size: 25px"
+                                valign="middle"
+                                align="center"
+                                height="25"
+                              >
+                                &nbsp;
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table
+          width="100%"
+          cellspacing="0"
+          cellpadding="0"
+          border="0"
+          align="center"
+        >
+          <tbody>
+            <tr>
+              <td valign="top" align="center">
+                <table
+                  class="main"
+                  width="600"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  align="center"
+                >
+                  <tbody>
+                    <tr>
+                      <td valign="middle" bgcolor="#FFFFFF" align="center">
+                        <table
+                          class="two-left-inner"
+                          width="450"
+                          cellspacing="0"
+                          cellpadding="0"
+                          border="0"
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                style="line-height: 80px; font-size: 80px"
+                                valign="middle"
+                                align="center"
+                                height="80"
+                              >
+                                &nbsp;
+                              </td>
+                            </tr>
+                            <tr>
+                              <td valign="middle" align="center">
+                                <table
+                                  width="100%"
+                                  cellspacing="0"
+                                  cellpadding="0"
+                                  border="0"
+                                  align="center"
+                                >
+                                  <tbody>
+                                    <tr>
+                                      <td
+                                        style="
+                                          font-family: \'Open Sans\', Verdana, Arial;
+                                          font-size: 24px;
+                                          font-weight: normal;
+                                          line-height: 28px;
+                                        "
+                                        data-color="theme-colour"
+                                        valign="middle"
+                                        align="center"
+                                      >
+                                        <multiline class="$BUILD_STATUS-COLOR"
+                                          >$BUILD_STATUS!</multiline
+                                        >
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td
+                                        style="
+                                          line-height: 10px;
+                                          font-size: 10px;
+                                        "
+                                        valign="middle"
+                                        align="center"
+                                        height="10"
+                                      >
+                                        &nbsp;
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td
+                                        style="
+                                          font-family: \'Open Sans\', Verdana, Arial;
+                                          font-size: 30px;
+                                          color: #121212;
+                                          font-weight: normal;
+                                        "
+                                        valign="middle"
+                                        align="center"
+                                      >
+                                        <multiline>$PROJECT_NAME</multiline>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td
+                                        style="
+                                          line-height: 10px;
+                                          font-size: 10px;
+                                        "
+                                        valign="middle"
+                                        align="center"
+                                        height="10"
+                                      >
+                                        &nbsp;
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td
+                                        style="
+                                          font-family: \'Open Sans\', Verdana, Arial;
+                                          font-size: 14px;
+                                          color: #767676;
+                                          font-weight: normal;
+                                          line-height: 32px;
+                                        "
+                                        valign="middle"
+                                        align="center"
+                                      >
+                                        <multiline
+                                          >Um novo Build executado no servidor,
+                                          maiores detalhes logo
+                                          abaixo</multiline
+                                        >
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td
+                                        style="
+                                          line-height: 35px;
+                                          font-size: 35px;
+                                        "
+                                        valign="middle"
+                                        align="center"
+                                        height="35"
+                                      >
+                                        &nbsp;
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td valign="middle" align="center">
+                                <table
+                                  width="100"
+                                  cellspacing="0"
+                                  cellpadding="0"
+                                  border="0"
+                                  align="center"
+                                >
+                                  <tbody>
+                                    <tr>
+                                      <td
+                                        style="
+                                          -moz-border-radius: 100px;
+                                          border-radius: 100px;
+                                        "
+                                        class="$BUILD_STATUS"
+                                        data-bgcolor="theme-bg"
+                                        valign="middle"
+                                        align="center"
+                                        height="100"
+                                      ></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="line-height: 25px; font-size: 25px"
+                                valign="middle"
+                                align="center"
+                                height="25"
+                              >
+                                &nbsp;
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="
+                                  font-family: \'Open Sans\', Verdana, Arial;
+                                  font-size: 18px;
+                                  color: #312e2e;
+                                  font-weight: normal;
+                                  line-height: 28px;
+                                "
+                                valign="middle"
+                                align="center"
+                              >
+                                <multiline><b>Build:</b> #$BUILD_NUMBER</multiline>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="
+                                  font-family: \'Open Sans\', Verdana, Arial;
+                                  font-size: 18px;
+                                  color: #312e2e;
+                                  font-weight: normal;
+                                  line-height: 28px;
+                                "
+                                valign="middle"
+                                align="center"
+                              >
+                                <multiline><b>Projeto:</b> $PROJECT_NAME</multiline>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="
+                                  font-family: \'Open Sans\', Verdana, Arial;
+                                  font-size: 18px;
+                                  color: #312e2e;
+                                  font-weight: normal;
+                                  line-height: 28px;
+                                "
+                                valign="middle"
+                                align="center"
+                              >
+                                <multiline><b>Status:</b> $BUILD_STATUS!</multiline>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="
+                                  font-family: \'Open Sans\', Verdana, Arial;
+                                  font-size: 18px;
+                                  color: #312e2e;
+                                  font-weight: normal;
+                                  line-height: 28px;
+                                "
+                                valign="middle"
+                                align="center"
+                              >
+                                <multiline> $ACTION </multiline>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <br />
+                                <br />
+                              </td>
+                            </tr>
+                            <tr>
+                              <td
+                                style="line-height: 80px; font-size: 80px"
+                                valign="middle"
+                                align="center"
+                                height="80"
+                              >
+                                &nbsp;
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody>
+              <tr>
+                <td valign="top" align="center">
+                  <table class="main" width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+                    <tbody>
+                      <tr>
+                        <td style="-moz-border-radius: 0px 0px 8px 8px; border-radius: 0px 0px 8px 8px;" valign="middle" class="$BUILD_STATUS" align="center">
+                          <table class="two-left-inner" width="490" cellspacing="0" cellpadding="0" border="0">
+                            <tbody>
+                              <tr>
+                                <td style="line-height:25px; font-size:25px;" valign="middle" align="center" height="25">&nbsp;</td>
+                              </tr>
+                              <tr>
+                                <td style="font-family:\'Open Sans\', Verdana, Arial; font-size:12px; color:#FFF; font-weight:bold; line-height:28px;" valign="middle" align="center">
+                                  <multiline>
+                                    © $ANO - Assessoria de Tecnologia e Informática - ASTIN <br>
+                                    Secretaria de Estado da Educação e da Cultura - SEDUC-SE
+                                  </multiline>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="line-height:25px; font-size:25px;" valign="middle" align="center" height="25">&nbsp;</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
